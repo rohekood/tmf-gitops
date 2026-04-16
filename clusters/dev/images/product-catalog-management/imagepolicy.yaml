@@ -1,0 +1,14 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: product-catalog-management
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: product-catalog-management
+  filterTags:
+    pattern: "^product-catalog-management-v(.*)$"
+    extract: "$1"
+  policy:
+    semver:
+      range: ">=0.0.0-0"

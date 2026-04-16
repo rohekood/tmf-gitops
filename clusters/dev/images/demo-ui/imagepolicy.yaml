@@ -1,0 +1,14 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: demo-ui
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: demo-ui
+  filterTags:
+    pattern: "^demo-ui-v(.*)-ui$"
+    extract: "$1"
+  policy:
+    semver:
+      range: ">=0.0.0-0"

@@ -1,0 +1,12 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: tmf-gitops
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: ssh://git@github.com/rohekood/tmf-gitops
+  ref:
+    branch: main
+  secretRef:
+    name: enercon-release-auth

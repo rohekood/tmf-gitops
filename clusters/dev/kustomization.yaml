@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- images/bff/imagerepository.yaml
+- images/bff/imagepolicy.yaml
+- images/customer-management/imagerepository.yaml
+- images/customer-management/imagepolicy.yaml
+- images/demo-ui/imagerepository.yaml
+- images/demo-ui/imagepolicy.yaml
+- images/party-management/imagerepository.yaml
+- images/party-management/imagepolicy.yaml
+- images/pocv/imagerepository.yaml
+- images/pocv/imagepolicy.yaml
+- images/product-catalog-management/imagerepository.yaml
+- images/product-catalog-management/imagepolicy.yaml
+- images/qualification/imagerepository.yaml
+- images/qualification/imagepolicy.yaml
+- images/shopping-cart/imagerepository.yaml
+- images/shopping-cart/imagepolicy.yaml
+- release/release.yaml
+- release/apps/tmf-platform.yaml
+- automation/gitrepository.yaml
+- automation/image-update.yaml

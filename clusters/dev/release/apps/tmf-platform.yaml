@@ -1,0 +1,68 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tmf-platform
+  namespace: tmf
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: ./releases/charts/tmf-platform
+      sourceRef:
+        kind: GitRepository
+        name: tmf-ai-demo
+        namespace: flux-system
+  values:
+    bff:
+      enabled: true
+      image:
+        tag: demo-ui-v0.0.4-bff # {"$imagepolicy": "flux-system:bff:tag"}
+      env:
+        secretName: tmf-secrets
+        auth0Domain: ""
+        auth0Audience: ""
+    customerManagement:
+      enabled: true
+      image:
+        tag: customer-management-v0.0.6 # {"$imagepolicy": "flux-system:customer-management:tag"}
+      env:
+        secretName: tmf-secrets
+    demoUi:
+      enabled: true
+      image:
+        tag: demo-ui-v0.0.4-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
+      service:
+        type: LoadBalancer
+        port: 80
+    partyManagement:
+      enabled: true
+      image:
+        tag: party-management-v0.0.7 # {"$imagepolicy": "flux-system:party-management:tag"}
+      env:
+        secretName: tmf-secrets
+    pocv:
+      enabled: true
+      image:
+        tag: pocv-v0.0.7 # {"$imagepolicy": "flux-system:pocv:tag"}
+      env:
+        secretName: tmf-secrets
+    productCatalogManagement:
+      enabled: true
+      image:
+        tag: product-catalog-management-v0.0.0 # {"$imagepolicy": "flux-system:product-catalog-management:tag"}
+      env:
+        secretName: tmf-secrets
+    qualification:
+      enabled: true
+      image:
+        tag: qualification-v0.0.4 # {"$imagepolicy": "flux-system:qualification:tag"}
+      env:
+        secretName: tmf-secrets
+        redisAddr: redis-master.tmf.svc.cluster.local:6379
+    shoppingCart:
+      enabled: true
+      image:
+        tag: shopping-cart-v0.0.5 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
+      env:
+        secretName: tmf-secrets

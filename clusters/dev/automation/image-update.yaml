@@ -1,0 +1,37 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: tmf-gitops-update
+  namespace: flux-system
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: tmf-gitops
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        Automated image update from flux
+
+        Automation name: {{ .AutomationObject }}
+
+        Images:
+        {{ range .Updated.Images -}}
+        - {{ . }}
+        {{ end }}
+
+        Files:
+        {{ range $filename, $_ := .Updated.Files -}}
+        - {{ $filename }}
+        {{ end }}
+    push:
+      branch: main
+  update:
+    strategy: Setters
+    path: ./clusters/dev

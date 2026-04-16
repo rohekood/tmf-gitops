@@ -1,0 +1,13 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: tmf-ai-demo
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: ssh://git@github.com/rohekood/tmf-ai-demo
+  ref:
+    branch: main
+  secretRef:
+    name: enercon-release-auth

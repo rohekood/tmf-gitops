@@ -1,0 +1,8 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: demo-ui
+  namespace: flux-system
+spec:
+  interval: 1m
+  image: ghcr.io/rohekood/demo-ui

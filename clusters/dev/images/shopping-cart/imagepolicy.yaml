@@ -1,0 +1,14 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: shopping-cart
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: shopping-cart
+  filterTags:
+    pattern: "^shopping-cart-v(.*)$"
+    extract: "$1"
+  policy:
+    semver:
+      range: ">=0.0.0-0"
