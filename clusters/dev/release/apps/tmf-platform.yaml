@@ -24,7 +24,7 @@ spec:
     customer-management:
       enabled: true
       image:
-        tag: customer-management-v0.0.6 # {"$imagepolicy": "flux-system:customer-management:tag"}
+        tag: customer-management-v0.1.1 # {"$imagepolicy": "flux-system:customer-management:tag"}
       env:
         secretName: tmf-secrets
     demo-ui:
