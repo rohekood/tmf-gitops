@@ -39,7 +39,7 @@ spec:
         auth0DomainKey: AUTH0_DOMAIN
         auth0ClientIdKey: AUTH0_CLIENT_ID
         auth0AudienceKey: AUTH0_AUDIENCE
-        apiUrl: /api
+        apiUrl: ""
         apiBaseUrl: ""
     emissary:
       enabled: false
