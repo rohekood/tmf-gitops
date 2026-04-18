@@ -1,17 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: emissary
+  name: emissary-crds
   namespace: flux-system
 spec:
   targetNamespace: emissary-system
   interval: 5m
-  dependsOn:
-    - name: emissary-crds
-      namespace: flux-system
   chart:
     spec:
-      chart: emissary-ingress
+      chart: emissary-crds-chart
       version: "4.0.1"
       sourceRef:
         kind: HelmRepository
@@ -19,8 +16,3 @@ spec:
         namespace: flux-system
   install:
     createNamespace: true
-  values:
-    service:
-      type: LoadBalancer
-      annotations:
-        metallb.universe.tf/address-pool: emissary-pool
