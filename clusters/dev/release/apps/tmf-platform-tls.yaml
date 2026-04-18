@@ -6,6 +6,21 @@ spec:
   selfSigned: {}
 ---
 apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: raino@rohekood.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+---
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: tmf-platform-tls
@@ -16,4 +31,17 @@ spec:
     - tmf.home.arpa
   issuerRef:
     name: tmf-selfsigned-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tmf-rohekood-tls
+  namespace: tmf
+spec:
+  secretName: tmf-rohekood-tls
+  dnsNames:
+    - tmf.rohekood.com
+  issuerRef:
+    name: letsencrypt-prod
     kind: ClusterIssuer

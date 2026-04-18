@@ -4,7 +4,7 @@ metadata:
   name: tmf-platform
   namespace: tmf
   annotations:
-    cert-manager.io/cluster-issuer: tmf-selfsigned-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
@@ -12,8 +12,28 @@ spec:
     - hosts:
         - tmf.home.arpa
       secretName: tmf-platform-tls
+    - hosts:
+        - tmf.rohekood.com
+      secretName: tmf-rohekood-tls
   rules:
     - host: tmf.home.arpa
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: tmf-platform-bff
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tmf-platform-demo-ui
+                port:
+                  number: 80
+    - host: tmf.rohekood.com
       http:
         paths:
           - path: /api
