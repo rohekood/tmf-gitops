@@ -30,7 +30,7 @@ spec:
     demo-ui:
       enabled: true
       image:
-        tag: demo-ui-v0.2.0-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
+        tag: demo-ui-v0.3.0-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
       service:
         type: ClusterIP
         port: 80
