@@ -12,7 +12,7 @@ spec:
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
-  name: emissary-pool
+  name: ingress-nginx-pool
   namespace: metallb-system
 spec:
   addresses:
@@ -22,8 +22,8 @@ spec:
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
-  name: emissary-pool
+  name: ingress-nginx-pool
   namespace: metallb-system
 spec:
   ipAddressPools:
-    - emissary-pool
+    - ingress-nginx-pool

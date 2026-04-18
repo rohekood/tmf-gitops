@@ -35,7 +35,7 @@ spec:
         type: ClusterIP
         port: 80
     emissary:
-      enabled: true
+      enabled: false
       # Optional: set hostname (DNS/IP) to require Host header matching.
       hostname: ""
       createHost: false

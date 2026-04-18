@@ -27,31 +27,32 @@ Apply manifests in this order:
 
 ```bash
 kubectl apply -f clusters/dev/release/release.yaml
-kubectl apply -f clusters/dev/release/infra/emissary-repository.yaml
-kubectl apply -f clusters/dev/release/infra/emissary-crds.yaml
-kubectl apply -f clusters/dev/release/infra/emissary.yaml
+kubectl apply -f clusters/dev/release/infra/ingress-nginx-repository.yaml
+kubectl apply -f clusters/dev/release/infra/ingress-nginx.yaml
+kubectl apply -f clusters/dev/release/infra/metallb-ingress-nginx-pool.yaml
 kubectl apply -f clusters/dev/release/apps/tmf-platform.yaml
+kubectl apply -f clusters/dev/release/apps/tmf-platform-ingress.yaml
 kubectl apply -R -f clusters/dev/images
 kubectl apply -R -f clusters/dev/automation
 ```
 
-## Emissary with MetalLB
+## ingress-nginx with MetalLB
 
-- Emissary version is pinned to `v4.0.1` (arm64/amd64 multiarch).
-- Emissary CRDs are installed via the dedicated `emissary-crds-chart` before the main Emissary chart.
-- Emissary is deployed as a `LoadBalancer` service and receives an external IP from MetalLB.
-- A dedicated MetalLB range is reserved for Emissary in `clusters/dev/release/infra/metallb-emissary-pool.yaml` (`192.168.10.40-192.168.10.45`).
-- The existing `first-pool` is split to avoid overlap (`10-39` and `46-50`), and `40-45` is reserved for Emissary.
-- tmf-platform now keeps `demo-ui` as `ClusterIP` and exposes app traffic through Emissary mappings.
-- tmf-platform Emissary mappings route:
-	- `/api/` to bff service
+- ingress-nginx is deployed via Helm chart `ingress-nginx` in namespace `ingress-nginx`.
+- ingress-nginx controller service is `LoadBalancer` and receives an external IP from MetalLB.
+- A dedicated MetalLB range is reserved for ingress-nginx in `clusters/dev/release/infra/metallb-ingress-nginx-pool.yaml` (`192.168.10.40-192.168.10.45`).
+- The existing `first-pool` is split to avoid overlap (`10-39` and `46-50`), and `40-45` is reserved for ingress-nginx.
+- tmf-platform keeps `demo-ui` and `bff` as `ClusterIP` and exposes routes via `clusters/dev/release/apps/tmf-platform-ingress.yaml`.
+- tmf-platform ingress routes:
+	- `/api` to bff service
 	- `/` to demo-ui service
 
 After applying manifests, verify:
 
 ```bash
 kubectl get svc -n emissary-system
-kubectl get mappings.getambassador.io -n tmf
+kubectl get svc -n ingress-nginx
+kubectl get ingress -n tmf
 kubectl get helmreleases -A
 ```
 

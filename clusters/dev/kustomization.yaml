@@ -20,8 +20,8 @@ resources:
   - images/shopping-cart/imagerepository.yaml
   - images/shopping-cart/imagepolicy.yaml
   - release/release.yaml
-  - release/infra/metallb-emissary-pool.yaml
-  - release/infra/emissary-repository.yaml
-  - release/infra/emissary-crds.yaml
-  - release/infra/emissary.yaml
+  - release/infra/metallb-ingress-nginx-pool.yaml
+  - release/infra/ingress-nginx-repository.yaml
+  - release/infra/ingress-nginx.yaml
   - release/apps/tmf-platform.yaml
+  - release/apps/tmf-platform-ingress.yaml
