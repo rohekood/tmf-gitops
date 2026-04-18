@@ -30,14 +30,14 @@ spec:
     demo-ui:
       enabled: true
       image:
-        tag: demo-ui-v0.1.0-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
+        tag: demo-ui-v0.2.0-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
       service:
         type: LoadBalancer
         port: 80
     party-management:
       enabled: true
       image:
-        tag: party-management-v0.0.7 # {"$imagepolicy": "flux-system:party-management:tag"}
+        tag: party-management-v0.1.0 # {"$imagepolicy": "flux-system:party-management:tag"}
       env:
         secretName: tmf-secrets
     pocv:
