@@ -16,7 +16,7 @@ spec:
     bff:
       enabled: true
       image:
-        tag: demo-ui-v0.3.0-bff # {"$imagepolicy": "flux-system:bff:tag"}
+        tag: demo-ui-v0.3.1-bff # {"$imagepolicy": "flux-system:bff:tag"}
       env:
         secretName: tmf-secrets
         auth0Domain: ""
@@ -30,7 +30,7 @@ spec:
     demo-ui:
       enabled: true
       image:
-        tag: demo-ui-v0.3.0-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
+        tag: demo-ui-v0.3.1-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
       service:
         type: ClusterIP
         port: 80
