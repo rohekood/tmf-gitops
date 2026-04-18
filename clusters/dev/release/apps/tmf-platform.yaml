@@ -19,8 +19,10 @@ spec:
         tag: demo-ui-v0.5.2-bff # {"$imagepolicy": "flux-system:bff:tag"}
       env:
         secretName: tmf-secrets
-        auth0Domain: ""
-        auth0Audience: ""
+        auth0:
+          secretName: tmf-secrets
+          domainKey: AUTH0_DOMAIN
+          audienceKey: AUTH0_AUDIENCE
     customer-management:
       enabled: true
       image:
