@@ -20,4 +20,7 @@ resources:
   - images/shopping-cart/imagerepository.yaml
   - images/shopping-cart/imagepolicy.yaml
   - release/release.yaml
+  - release/infra/metallb-emissary-pool.yaml
+  - release/infra/emissary-repository.yaml
+  - release/infra/emissary.yaml
   - release/apps/tmf-platform.yaml

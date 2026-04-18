@@ -33,8 +33,16 @@ spec:
       image:
         tag: demo-ui-v0.0.4-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
       service:
-        type: LoadBalancer
+        type: ClusterIP
         port: 80
+    emissary:
+      enabled: true
+      # Optional: set hostname (DNS/IP) to require Host header matching.
+      hostname: ""
+      createHost: false
+      mapping:
+        apiPrefix: /api/
+        uiPrefix: /
     party-management:
       enabled: true
       image:

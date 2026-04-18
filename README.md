@@ -27,9 +27,28 @@ Apply manifests in this order:
 
 ```bash
 kubectl apply -f clusters/dev/release/release.yaml
+kubectl apply -f clusters/dev/release/infra/emissary-repository.yaml
+kubectl apply -f clusters/dev/release/infra/emissary.yaml
 kubectl apply -f clusters/dev/release/apps/tmf-platform.yaml
 kubectl apply -R -f clusters/dev/images
 kubectl apply -R -f clusters/dev/automation
+```
+
+## Emissary with MetalLB
+
+- Emissary is deployed as a `LoadBalancer` service and receives an external IP from MetalLB.
+- A dedicated MetalLB range is reserved for Emissary in `clusters/dev/release/infra/metallb-emissary-pool.yaml` (`192.168.10.40-192.168.10.45`).
+- tmf-platform now keeps `demo-ui` as `ClusterIP` and exposes app traffic through Emissary mappings.
+- tmf-platform Emissary mappings route:
+	- `/api/` to bff service
+	- `/` to demo-ui service
+
+After applying manifests, verify:
+
+```bash
+kubectl get svc -n emissary-system
+kubectl get mappings.getambassador.io -n tmf
+kubectl get helmreleases -A
 ```
 
 ## Runtime secrets (required)
