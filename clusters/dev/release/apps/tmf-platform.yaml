@@ -22,20 +22,20 @@ spec:
         secretName: tmf-secrets
         auth0Domain: ""
         auth0Audience: ""
-    customerManagement:
+    customer-management:
       enabled: true
       image:
         tag: customer-management-v0.0.6 # {"$imagepolicy": "flux-system:customer-management:tag"}
       env:
         secretName: tmf-secrets
-    demoUi:
+    demo-ui:
       enabled: true
       image:
         tag: demo-ui-v0.0.4-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
       service:
         type: LoadBalancer
         port: 80
-    partyManagement:
+    party-management:
       enabled: true
       image:
         tag: party-management-v0.0.7 # {"$imagepolicy": "flux-system:party-management:tag"}
@@ -47,7 +47,7 @@ spec:
         tag: pocv-v0.0.7 # {"$imagepolicy": "flux-system:pocv:tag"}
       env:
         secretName: tmf-secrets
-    productCatalogManagement:
+    product-catalog-management:
       enabled: true
       image:
         tag: product-catalog-management-v0.0.0 # {"$imagepolicy": "flux-system:product-catalog-management:tag"}
@@ -60,7 +60,7 @@ spec:
       env:
         secretName: tmf-secrets
         redisAddr: redis-master.tmf.svc.cluster.local:6379
-    shoppingCart:
+    shopping-cart:
       enabled: true
       image:
         tag: shopping-cart-v0.0.5 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
