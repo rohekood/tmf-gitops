@@ -38,6 +38,7 @@ kubectl apply -R -f clusters/dev/automation
 
 - Emissary is deployed as a `LoadBalancer` service and receives an external IP from MetalLB.
 - A dedicated MetalLB range is reserved for Emissary in `clusters/dev/release/infra/metallb-emissary-pool.yaml` (`192.168.10.40-192.168.10.45`).
+- The existing `first-pool` is split to avoid overlap (`10-39` and `46-50`), and `40-45` is reserved for Emissary.
 - tmf-platform now keeps `demo-ui` as `ClusterIP` and exposes app traffic through Emissary mappings.
 - tmf-platform Emissary mappings route:
 	- `/api/` to bff service

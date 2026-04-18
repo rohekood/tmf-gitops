@@ -1,6 +1,17 @@
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+    - 192.168.10.10-192.168.10.39
+    - 192.168.10.46-192.168.10.50
+  autoAssign: true
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
   name: emissary-pool
   namespace: metallb-system
 spec:
