@@ -16,7 +16,7 @@ spec:
     bff:
       enabled: true
       image:
-        tag: demo-ui-v0.4.0-bff # {"$imagepolicy": "flux-system:bff:tag"}
+        tag: demo-ui-v0.5.0-bff # {"$imagepolicy": "flux-system:bff:tag"}
       env:
         secretName: tmf-secrets
         auth0Domain: ""
