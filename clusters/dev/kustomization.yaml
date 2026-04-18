@@ -21,4 +21,3 @@ resources:
   - images/shopping-cart/imagepolicy.yaml
   - release/release.yaml
   - release/apps/tmf-platform.yaml
-  - secrets/tmf-secrets.yaml
