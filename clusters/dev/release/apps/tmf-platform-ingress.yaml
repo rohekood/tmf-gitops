@@ -3,10 +3,18 @@ kind: Ingress
 metadata:
   name: tmf-platform
   namespace: tmf
+  annotations:
+    cert-manager.io/cluster-issuer: tmf-selfsigned-issuer
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - tmf.home.arpa
+      secretName: tmf-platform-tls
   rules:
-    - http:
+    - host: tmf.home.arpa
+      http:
         paths:
           - path: /api
             pathType: Prefix

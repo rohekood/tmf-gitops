@@ -31,6 +31,7 @@ kubectl apply -f clusters/dev/release/infra/ingress-nginx-repository.yaml
 kubectl apply -f clusters/dev/release/infra/ingress-nginx.yaml
 kubectl apply -f clusters/dev/release/infra/metallb-ingress-nginx-pool.yaml
 kubectl apply -f clusters/dev/release/apps/tmf-platform.yaml
+kubectl apply -f clusters/dev/release/apps/tmf-platform-tls.yaml
 kubectl apply -f clusters/dev/release/apps/tmf-platform-ingress.yaml
 kubectl apply -R -f clusters/dev/images
 kubectl apply -R -f clusters/dev/automation
