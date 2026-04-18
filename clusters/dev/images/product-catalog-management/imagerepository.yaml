@@ -6,3 +6,5 @@ metadata:
 spec:
   interval: 1m
   image: ghcr.io/rohekood/product-catalog-management
+  secretRef:
+    name: github-registry

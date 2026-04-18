@@ -6,3 +6,5 @@ metadata:
 spec:
   interval: 1m
   image: ghcr.io/rohekood/shopping-cart
+  secretRef:
+    name: github-registry
