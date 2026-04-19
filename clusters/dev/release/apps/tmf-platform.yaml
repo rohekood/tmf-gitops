@@ -60,7 +60,7 @@ spec:
     pocv:
       enabled: true
       image:
-        tag: pocv-v0.1.0 # {"$imagepolicy": "flux-system:pocv:tag"}
+        tag: pocv-v0.2.0 # {"$imagepolicy": "flux-system:pocv:tag"}
       env:
         secretName: tmf-secrets
     product-catalog-management:
@@ -72,7 +72,7 @@ spec:
     qualification:
       enabled: true
       image:
-        tag: qualification-v0.2.0 # {"$imagepolicy": "flux-system:qualification:tag"}
+        tag: qualification-v0.3.0 # {"$imagepolicy": "flux-system:qualification:tag"}
       env:
         secretName: tmf-secrets
         redisAddr: redis-master.tmf.svc.cluster.local:6379
