@@ -60,7 +60,7 @@ spec:
     pocv:
       enabled: true
       image:
-        tag: pocv-v0.2.0 # {"$imagepolicy": "flux-system:pocv:tag"}
+        tag: pocv-v0.3.0 # {"$imagepolicy": "flux-system:pocv:tag"}
       env:
         secretName: tmf-secrets
     product-catalog-management:
