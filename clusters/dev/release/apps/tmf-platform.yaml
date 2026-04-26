@@ -72,7 +72,7 @@ spec:
     qualification:
       enabled: true
       image:
-        tag: qualification-v0.3.0 # {"$imagepolicy": "flux-system:qualification:tag"}
+        tag: qualification-v0.5.0 # {"$imagepolicy": "flux-system:qualification:tag"}
       env:
         secretName: tmf-secrets
         redisAddr: redis-master.tmf.svc.cluster.local:6379
