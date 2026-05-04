@@ -54,7 +54,7 @@ spec:
     party-management:
       enabled: true
       image:
-        tag: party-management-v0.4.0 # {"$imagepolicy": "flux-system:party-management:tag"}
+        tag: party-management-v0.4.1 # {"$imagepolicy": "flux-system:party-management:tag"}
       env:
         secretName: tmf-secrets
     pocv:
