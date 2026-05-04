@@ -79,6 +79,6 @@ spec:
     shopping-cart:
       enabled: true
       image:
-        tag: shopping-cart-v0.5.0 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
+        tag: shopping-cart-v0.5.1 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
       env:
         secretName: tmf-secrets
