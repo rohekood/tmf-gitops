@@ -18,9 +18,9 @@ spec:
       image:
         tag: demo-ui-v0.5.2-bff # {"$imagepolicy": "flux-system:bff:tag"}
       env:
-        secretName: tmf-secrets
+        secretName: bff-secrets
         auth0:
-          secretName: tmf-secrets
+          secretName: bff-secrets
           domainKey: AUTH0_DOMAIN
           audienceKey: AUTH0_AUDIENCE
     customer-management:
@@ -28,7 +28,7 @@ spec:
       image:
         tag: customer-management-v0.1.1 # {"$imagepolicy": "flux-system:customer-management:tag"}
       env:
-        secretName: tmf-secrets
+        secretName: customer-management-secrets
     demo-ui:
       enabled: true
       image:
@@ -37,7 +37,7 @@ spec:
         type: ClusterIP
         port: 80
       env:
-        secretName: tmf-secrets
+        secretName: demo-ui-secrets
         auth0DomainKey: AUTH0_DOMAIN
         auth0ClientIdKey: AUTH0_CLIENT_ID
         auth0AudienceKey: AUTH0_AUDIENCE
@@ -56,29 +56,29 @@ spec:
       image:
         tag: party-management-v0.1.0 # {"$imagepolicy": "flux-system:party-management:tag"}
       env:
-        secretName: tmf-secrets
+        secretName: party-management-secrets
     pocv:
       enabled: true
       image:
         tag: pocv-v0.1.0 # {"$imagepolicy": "flux-system:pocv:tag"}
       env:
-        secretName: tmf-secrets
+        secretName: pocv-secrets
     product-catalog-management:
       enabled: true
       image:
         tag: product-catalog-management-v0.1.0 # {"$imagepolicy": "flux-system:product-catalog-management:tag"}
       env:
-        secretName: tmf-secrets
+        secretName: product-catalog-management-secrets
     qualification:
       enabled: true
       image:
         tag: qualification-v0.2.0 # {"$imagepolicy": "flux-system:qualification:tag"}
       env:
-        secretName: tmf-secrets
-        redisAddr: redis-master.tmf.svc.cluster.local:6379
+        secretName: qualification-secrets
+        redisAddr: 192.168.10.254:6379
     shopping-cart:
       enabled: true
       image:
         tag: shopping-cart-v0.2.0 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
       env:
-        secretName: tmf-secrets
+        secretName: shopping-cart-secrets

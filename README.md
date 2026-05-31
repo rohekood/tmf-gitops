@@ -59,31 +59,57 @@ kubectl get helmreleases -A
 
 ## Runtime secrets (required)
 
-Credentialed connection strings must be stored in Kubernetes Secrets, not inline Helm values.
+Each service has its own Kubernetes Secret. Secrets are **never committed to git** — apply them directly with kubectl.
 
-The umbrella HelmRelease uses `env.secretName: tmf-secrets` for backend services, so create this secret in namespace `tmf` with these keys:
+Each service reads `RABBITMQ_URL` from its own secret, allowing per-service RabbitMQ credentials.
+Before creating secrets, run `tmf/scripts/rabbitmq-setup-prod.sh` to provision broker users.
 
-- `RABBITMQ_URL`
-- `CUSTOMER_DB_URL`
-- `PARTY_DB_URL`
-- `CATALOG_DB_URL`
-- `CART_DB_URL`
-- `POCV_DB_URL`
-- `QUALIFICATION_DB_URL`
-- `REDIS_PASSWORD` (only if your Redis setup requires auth)
-
-Example:
+> **CloudAMQP note**: The vhost is fixed to your account name (e.g. `evlrxeci`). Pass `RABBIT_VHOST=evlrxeci` when running the setup script. Vhost creation will be skipped if it already exists.
 
 ```bash
-kubectl create secret generic tmf-secrets \
-	-n tmf \
-	--from-literal=RABBITMQ_URL='amqps://user:pass@host/vhost' \
-	--from-literal=CUSTOMER_DB_URL='postgres://user:pass@host:5432/db?sslmode=require' \
-	--from-literal=PARTY_DB_URL='postgres://user:pass@host:5432/db?sslmode=require' \
-	--from-literal=CATALOG_DB_URL='postgres://user:pass@host:5432/db?sslmode=require' \
-	--from-literal=CART_DB_URL='postgres://user:pass@host:5432/db?sslmode=require' \
-	--from-literal=POCV_DB_URL='postgres://user:pass@host:5432/db?sslmode=require' \
-	--from-literal=QUALIFICATION_DB_URL='postgres://user:pass@host:5432/db?sslmode=require'
+# party-management
+kubectl create secret generic party-management-secrets -n tmf \
+  --from-literal=RABBITMQ_URL='amqps://tmf_party:<password>@dog.lmq.cloudamqp.com/evlrxeci' \
+  --from-literal=PARTY_DB_URL='postgres://user:pass@host:5432/tmf_party_db?sslmode=require'
+
+# customer-management
+kubectl create secret generic customer-management-secrets -n tmf \
+  --from-literal=RABBITMQ_URL='amqps://tmf_customer:<password>@dog.lmq.cloudamqp.com/evlrxeci' \
+  --from-literal=CUSTOMER_DB_URL='postgres://user:pass@host:5432/tmf_customer_db?sslmode=require'
+
+# product-catalog-management
+kubectl create secret generic product-catalog-management-secrets -n tmf \
+  --from-literal=RABBITMQ_URL='amqps://tmf_catalog:<password>@dog.lmq.cloudamqp.com/evlrxeci' \
+  --from-literal=CATALOG_DB_URL='postgres://user:pass@host:5432/tmf_catalog_db?sslmode=require'
+
+# qualification
+kubectl create secret generic qualification-secrets -n tmf \
+  --from-literal=RABBITMQ_URL='amqps://tmf_qualification:<password>@dog.lmq.cloudamqp.com/evlrxeci' \
+  --from-literal=QUALIFICATION_DB_URL='postgres://user:pass@host:5432/tmf_qualification_db?sslmode=require' \
+  --from-literal=REDIS_URL='redis://...' \
+  --from-literal=REDIS_PASSWORD='<redis-password>'
+
+# shopping-cart
+kubectl create secret generic shopping-cart-secrets -n tmf \
+  --from-literal=RABBITMQ_URL='amqps://tmf_cart:<password>@dog.lmq.cloudamqp.com/evlrxeci' \
+  --from-literal=CART_DB_URL='postgres://user:pass@host:5432/tmf_cart_db?sslmode=require'
+
+# pocv
+kubectl create secret generic pocv-secrets -n tmf \
+  --from-literal=RABBITMQ_URL='amqps://tmf_pocv:<password>@dog.lmq.cloudamqp.com/evlrxeci' \
+  --from-literal=POCV_DB_URL='postgres://user:pass@host:5432/tmf_pocv_db?sslmode=require'
+
+# bff
+kubectl create secret generic bff-secrets -n tmf \
+  --from-literal=RABBITMQ_URL='amqps://tmf_bff:<password>@dog.lmq.cloudamqp.com/evlrxeci' \
+  --from-literal=AUTH0_DOMAIN='your-tenant.eu.auth0.com' \
+  --from-literal=AUTH0_AUDIENCE='https://api.your-domain.com'
+
+# demo-ui (no RabbitMQ, only Auth0)
+kubectl create secret generic demo-ui-secrets -n tmf \
+  --from-literal=AUTH0_DOMAIN='your-tenant.eu.auth0.com' \
+  --from-literal=AUTH0_CLIENT_ID='your-client-id' \
+  --from-literal=AUTH0_AUDIENCE='https://api.your-domain.com'
 ```
 
 ## Image automation
