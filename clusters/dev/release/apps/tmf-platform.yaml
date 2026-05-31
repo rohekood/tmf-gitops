@@ -16,7 +16,7 @@ spec:
     bff:
       enabled: true
       image:
-        tag: demo-ui-v0.5.2-bff # {"$imagepolicy": "flux-system:bff:tag"}
+        tag: demo-ui-v0.8.1-bff # {"$imagepolicy": "flux-system:bff:tag"}
       env:
         secretName: bff-secrets
         auth0:
@@ -26,13 +26,13 @@ spec:
     customer-management:
       enabled: true
       image:
-        tag: customer-management-v0.1.1 # {"$imagepolicy": "flux-system:customer-management:tag"}
+        tag: customer-management-v0.4.1 # {"$imagepolicy": "flux-system:customer-management:tag"}
       env:
         secretName: customer-management-secrets
     demo-ui:
       enabled: true
       image:
-        tag: demo-ui-v0.5.2-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
+        tag: demo-ui-v0.8.1-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
       service:
         type: ClusterIP
         port: 80
@@ -54,31 +54,31 @@ spec:
     party-management:
       enabled: true
       image:
-        tag: party-management-v0.1.0 # {"$imagepolicy": "flux-system:party-management:tag"}
+        tag: party-management-v0.4.1 # {"$imagepolicy": "flux-system:party-management:tag"}
       env:
         secretName: party-management-secrets
     pocv:
       enabled: true
       image:
-        tag: pocv-v0.1.0 # {"$imagepolicy": "flux-system:pocv:tag"}
+        tag: pocv-v0.5.1 # {"$imagepolicy": "flux-system:pocv:tag"}
       env:
         secretName: pocv-secrets
     product-catalog-management:
       enabled: true
       image:
-        tag: product-catalog-management-v0.1.0 # {"$imagepolicy": "flux-system:product-catalog-management:tag"}
+        tag: product-catalog-management-v0.4.1 # {"$imagepolicy": "flux-system:product-catalog-management:tag"}
       env:
         secretName: product-catalog-management-secrets
     qualification:
       enabled: true
       image:
-        tag: qualification-v0.2.0 # {"$imagepolicy": "flux-system:qualification:tag"}
+        tag: qualification-v0.5.0 # {"$imagepolicy": "flux-system:qualification:tag"}
       env:
         secretName: qualification-secrets
         redisAddr: 192.168.10.254:6379
     shopping-cart:
       enabled: true
       image:
-        tag: shopping-cart-v0.2.0 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
+        tag: shopping-cart-v0.5.1 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
       env:
         secretName: shopping-cart-secrets
