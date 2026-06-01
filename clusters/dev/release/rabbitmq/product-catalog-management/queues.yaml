@@ -1,0 +1,43 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: catalog-commands
+  namespace: tmf
+spec:
+  name: catalog_commands
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: catalog-queries
+  namespace: tmf
+spec:
+  name: catalog_queries
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# Dedicated RPC queue for query.catalog.offering.# requests.
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: catalog-rpc-queue
+  namespace: tmf
+spec:
+  name: catalog_rpc_queue
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

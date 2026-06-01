@@ -1,0 +1,11 @@
+# Both operators were bootstrapped via kubectl apply (not Helm) to avoid a
+# chicken-and-egg ordering problem with the topology CRDs.
+#
+# Cluster Operator (manages RabbitmqCluster resources):
+#   kubectl apply -f https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml
+#
+# Messaging Topology Operator v1.19.2 (manages Exchange/Queue/Binding CRDs):
+#   kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/releases/download/v1.19.2/messaging-topology-operator-with-certmanager.yaml
+#
+# Both operators run in the rabbitmq-system namespace.
+# Upgrade by re-running the kubectl apply commands above with the new version tag.

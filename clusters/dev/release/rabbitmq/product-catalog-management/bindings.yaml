@@ -1,0 +1,91 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: catalog-commands-catalog-wildcard
+  namespace: tmf
+spec:
+  source: catalog_events
+  destination: catalog_commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: "cmd.catalog.catalog.*"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: catalog-commands-category-wildcard
+  namespace: tmf
+spec:
+  source: catalog_events
+  destination: catalog_commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: "cmd.catalog.category.*"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: catalog-commands-specification-wildcard
+  namespace: tmf
+spec:
+  source: catalog_events
+  destination: catalog_commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: "cmd.catalog.specification.*"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: catalog-commands-offering-wildcard
+  namespace: tmf
+spec:
+  source: catalog_events
+  destination: catalog_commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: "cmd.catalog.offering.*"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: catalog-queries-wildcard
+  namespace: tmf
+spec:
+  source: catalog_events
+  destination: catalog_queries
+  destinationType: queue
+  vhost: tmf
+  routingKey: "query.catalog.#"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# RPC binding: handles synchronous offering queries from BFF and qualification.
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: catalog-rpc-offering-wildcard
+  namespace: tmf
+spec:
+  source: catalog_events
+  destination: catalog_rpc_queue
+  destinationType: queue
+  vhost: tmf
+  routingKey: "query.catalog.offering.#"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

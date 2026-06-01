@@ -1,0 +1,16 @@
+---
+# Carries all saga orchestration events: inventory reservation, payment auth, order creation.
+apiVersion: rabbitmq.com/v1beta1
+kind: Exchange
+metadata:
+  name: ex-domain-order
+  namespace: tmf
+spec:
+  name: ex.domain.order
+  type: topic
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

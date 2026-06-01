@@ -1,0 +1,167 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-dlq-to-dlx
+  namespace: tmf
+spec:
+  source: tmf.dlx
+  destination: customer.dlq
+  destinationType: queue
+  vhost: tmf
+  routingKey: ""
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-commands-onboard
+  namespace: tmf
+spec:
+  source: tmf.customer
+  destination: customer.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.customer.onboard
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-commands-update
+  namespace: tmf
+spec:
+  source: tmf.customer
+  destination: customer.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.customer.update
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-commands-patch
+  namespace: tmf
+spec:
+  source: tmf.customer
+  destination: customer.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.customer.patch
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-commands-search
+  namespace: tmf
+spec:
+  source: tmf.customer
+  destination: customer.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: query.customer.search
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-commands-delete
+  namespace: tmf
+spec:
+  source: tmf.customer
+  destination: customer.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.customer.delete
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-commands-log-interaction
+  namespace: tmf
+spec:
+  source: tmf.customer
+  destination: customer.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.customer.interaction.log
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# customer.events queue subscribes to party lifecycle events from tmf.events.
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-events-party-updated
+  namespace: tmf
+spec:
+  source: tmf.events
+  destination: customer.events
+  destinationType: queue
+  vhost: tmf
+  routingKey: evt.party.updated
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-events-party-deleted
+  namespace: tmf
+spec:
+  source: tmf.events
+  destination: customer.events
+  destinationType: queue
+  vhost: tmf
+  routingKey: evt.party.deleted
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-events-party-deletion-initiated
+  namespace: tmf
+spec:
+  source: tmf.events
+  destination: customer.events
+  destinationType: queue
+  vhost: tmf
+  routingKey: evt.party.deletion_initiated
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# RPC binding: customer_rpc_queue handles synchronous query.customer.get requests.
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: customer-rpc-get
+  namespace: tmf
+spec:
+  source: customer.events
+  destination: customer_rpc_queue
+  destinationType: queue
+  vhost: tmf
+  routingKey: query.customer.get
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

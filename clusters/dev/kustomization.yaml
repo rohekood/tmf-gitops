@@ -23,6 +23,9 @@ resources:
   - release/infra/metallb-ingress-nginx-pool.yaml
   - release/infra/ingress-nginx-repository.yaml
   - release/infra/ingress-nginx.yaml
+  - release/infra/rabbitmq-operator.yaml
+  - release/infra/rabbitmq-operator-repository.yaml
   - release/apps/tmf-platform.yaml
   - release/apps/tmf-platform-tls.yaml
   - release/apps/tmf-platform-ingress.yaml
+  - release/rabbitmq/

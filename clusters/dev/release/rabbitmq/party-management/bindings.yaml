@@ -1,0 +1,151 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-dlq-to-dlx
+  namespace: tmf
+spec:
+  source: tmf.dlx
+  destination: party.dlq
+  destinationType: queue
+  vhost: tmf
+  routingKey: ""
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-commands-create
+  namespace: tmf
+spec:
+  source: tmf.party
+  destination: party.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.party.create
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-commands-update
+  namespace: tmf
+spec:
+  source: tmf.party
+  destination: party.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.party.update
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-commands-patch
+  namespace: tmf
+spec:
+  source: tmf.party
+  destination: party.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.party.patch
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-commands-delete
+  namespace: tmf
+spec:
+  source: tmf.party
+  destination: party.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.party.delete
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-commands-finalize-deletion
+  namespace: tmf
+spec:
+  source: tmf.party
+  destination: party.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.party.finalize_deletion
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-commands-cancel-deletion
+  namespace: tmf
+spec:
+  source: tmf.party
+  destination: party.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.party.cancel_deletion
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-commands-get
+  namespace: tmf
+spec:
+  source: tmf.party
+  destination: party.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: query.party.get
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-commands-search
+  namespace: tmf
+spec:
+  source: tmf.party
+  destination: party.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: query.party.search
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# party.events subscribes to customer creation events from the shared tmf.events exchange.
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: party-events-customer-created
+  namespace: tmf
+spec:
+  source: tmf.events
+  destination: party.events
+  destinationType: queue
+  vhost: tmf
+  routingKey: evt.customer.created
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

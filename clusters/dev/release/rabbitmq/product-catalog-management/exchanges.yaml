@@ -1,0 +1,15 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Exchange
+metadata:
+  name: catalog-events
+  namespace: tmf
+spec:
+  name: catalog_events
+  type: topic
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

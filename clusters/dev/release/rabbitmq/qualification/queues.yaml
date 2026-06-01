@@ -1,0 +1,29 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: q-qual-command
+  namespace: tmf
+spec:
+  name: q.qual.command
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# Dedicated RPC queue for query.qual.session.get (price session reads by cart and POCV).
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: q-qual-rpc
+  namespace: tmf
+spec:
+  name: q.qual.rpc
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

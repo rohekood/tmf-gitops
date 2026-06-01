@@ -1,0 +1,63 @@
+# tmf.dlx is shared with party-management; declared here as the primary owner.
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Exchange
+metadata:
+  name: tmf-dlx
+  namespace: tmf
+spec:
+  name: tmf.dlx
+  type: fanout
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Exchange
+metadata:
+  name: tmf-customer
+  namespace: tmf
+spec:
+  name: tmf.customer
+  type: topic
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# tmf.events is shared with party-management.
+apiVersion: rabbitmq.com/v1beta1
+kind: Exchange
+metadata:
+  name: tmf-events
+  namespace: tmf
+spec:
+  name: tmf.events
+  type: topic
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# Used as the exchange for customer RPC (query.customer.get).
+apiVersion: rabbitmq.com/v1beta1
+kind: Exchange
+metadata:
+  name: customer-events-exchange
+  namespace: tmf
+spec:
+  name: customer.events
+  type: topic
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

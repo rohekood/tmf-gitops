@@ -1,0 +1,76 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: cart-commands-add-item
+  namespace: tmf
+spec:
+  source: ex.domain.commerce
+  destination: q.cart.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.cart.item.add
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: cart-commands-remove-item
+  namespace: tmf
+spec:
+  source: ex.domain.commerce
+  destination: q.cart.commands
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.cart.item.remove
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# Wildcard binding so the cart receives all offering change events for price sync.
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: cart-catalog-sync-offering-wildcard
+  namespace: tmf
+spec:
+  source: ex.domain.catalog
+  destination: q.cart.catalog.sync
+  destinationType: queue
+  vhost: tmf
+  routingKey: "evt.catalog.offering.#"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: cart-rpc-session-get
+  namespace: tmf
+spec:
+  source: ex.domain.commerce
+  destination: q.cart.rpc.v2
+  destinationType: queue
+  vhost: tmf
+  routingKey: query.cart.session.get
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: cart-rpc-get
+  namespace: tmf
+spec:
+  source: ex.domain.commerce
+  destination: q.cart.rpc.v2
+  destinationType: queue
+  vhost: tmf
+  routingKey: query.cart.get
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

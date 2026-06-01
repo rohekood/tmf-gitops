@@ -1,0 +1,44 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: q-cart-commands
+  namespace: tmf
+spec:
+  name: q.cart.commands
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# Receives catalog offering events to keep cart prices in sync.
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: q-cart-catalog-sync
+  namespace: tmf
+spec:
+  name: q.cart.catalog.sync
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# RPC queue: handles query.cart.get and query.cart.session.get from BFF and POCV.
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: q-cart-rpc-v2
+  namespace: tmf
+spec:
+  name: q.cart.rpc.v2
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

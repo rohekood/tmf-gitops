@@ -1,0 +1,31 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: qual-command-eligibility-check
+  namespace: tmf
+spec:
+  source: ex.domain.market
+  destination: q.qual.command
+  destinationType: queue
+  vhost: tmf
+  routingKey: cmd.qual.eligibility.check
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# RPC binding: price session queries from shopping-cart and POCV.
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: qual-rpc-session-get
+  namespace: tmf
+spec:
+  source: ex.domain.market
+  destination: q.qual.rpc
+  destinationType: queue
+  vhost: tmf
+  routingKey: query.qual.session.get
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

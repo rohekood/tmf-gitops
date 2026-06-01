@@ -1,0 +1,46 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: party-dlq
+  namespace: tmf
+spec:
+  name: party.dlq
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: party-commands
+  namespace: tmf
+spec:
+  name: party.commands
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  arguments:
+    x-dead-letter-exchange: tmf.dlx
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: party-events
+  namespace: tmf
+spec:
+  name: party.events
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  arguments:
+    x-dead-letter-exchange: tmf.dlx
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

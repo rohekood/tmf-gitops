@@ -1,0 +1,32 @@
+---
+# Wildcard binding: the saga consumer handles every event on ex.domain.order.
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: pocv-saga-wildcard
+  namespace: tmf
+spec:
+  source: ex.domain.order
+  destination: q.pocv.saga
+  destinationType: queue
+  vhost: tmf
+  routingKey: "#"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# RPC binding: saga status lookups.
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: pocv-rpc-saga-get
+  namespace: tmf
+spec:
+  source: ex.domain.order
+  destination: q.pocv.rpc
+  destinationType: queue
+  vhost: tmf
+  routingKey: query.pocv.saga.get
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

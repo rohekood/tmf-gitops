@@ -29,6 +29,9 @@ spec:
         tag: customer-management-v0.4.1 # {"$imagepolicy": "flux-system:customer-management:tag"}
       env:
         secretName: customer-management-secrets
+        extra:
+          - name: RABBITMQ_PASSIVE_DECLARE
+            value: "true"
     demo-ui:
       enabled: true
       image:
@@ -57,18 +60,27 @@ spec:
         tag: party-management-v0.4.1 # {"$imagepolicy": "flux-system:party-management:tag"}
       env:
         secretName: party-management-secrets
+        extra:
+          - name: RABBITMQ_PASSIVE_DECLARE
+            value: "true"
     pocv:
       enabled: true
       image:
         tag: pocv-v0.5.1 # {"$imagepolicy": "flux-system:pocv:tag"}
       env:
         secretName: pocv-secrets
+        extra:
+          - name: RABBITMQ_PASSIVE_DECLARE
+            value: "true"
     product-catalog-management:
       enabled: true
       image:
         tag: product-catalog-management-v0.4.1 # {"$imagepolicy": "flux-system:product-catalog-management:tag"}
       env:
         secretName: product-catalog-management-secrets
+        extra:
+          - name: RABBITMQ_PASSIVE_DECLARE
+            value: "true"
     qualification:
       enabled: true
       image:
@@ -76,9 +88,15 @@ spec:
       env:
         secretName: qualification-secrets
         redisAddr: 192.168.10.254:6379
+        extra:
+          - name: RABBITMQ_PASSIVE_DECLARE
+            value: "true"
     shopping-cart:
       enabled: true
       image:
         tag: shopping-cart-v0.5.1 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
       env:
         secretName: shopping-cart-secrets
+        extra:
+          - name: RABBITMQ_PASSIVE_DECLARE
+            value: "true"

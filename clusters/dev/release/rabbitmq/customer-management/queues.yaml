@@ -1,0 +1,62 @@
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: customer-dlq
+  namespace: tmf
+spec:
+  name: customer.dlq
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: customer-commands
+  namespace: tmf
+spec:
+  name: customer.commands
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  arguments:
+    x-dead-letter-exchange: tmf.dlx
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# customer.events is also the name of the exchange used for RPC — they are separate AMQP entities.
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: customer-events-queue
+  namespace: tmf
+spec:
+  name: customer.events
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  arguments:
+    x-dead-letter-exchange: tmf.dlx
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# Dedicated RPC reply queue for query.customer.get.
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: customer-rpc-queue
+  namespace: tmf
+spec:
+  name: customer_rpc_queue
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

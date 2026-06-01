@@ -1,0 +1,30 @@
+---
+# Receives all events on ex.domain.order (#) so the saga state machine processes every step.
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: q-pocv-saga
+  namespace: tmf
+spec:
+  name: q.pocv.saga
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+# RPC queue for query.pocv.saga.get (saga status lookups by BFF).
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: q-pocv-rpc
+  namespace: tmf
+spec:
+  name: q.pocv.rpc
+  durable: true
+  autoDelete: false
+  vhost: tmf
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
