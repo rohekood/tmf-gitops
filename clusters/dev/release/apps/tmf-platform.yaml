@@ -16,7 +16,7 @@ spec:
     bff:
       enabled: true
       image:
-        tag: demo-ui-v0.9.0-bff # {"$imagepolicy": "flux-system:bff:tag"}
+        tag: demo-ui-v0.13.0-bff # {"$imagepolicy": "flux-system:bff:tag"}
       env:
         secretName: bff-secrets
         auth0:
@@ -35,7 +35,7 @@ spec:
     demo-ui:
       enabled: true
       image:
-        tag: demo-ui-v0.8.1-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
+        tag: demo-ui-v0.12.0-ui # {"$imagepolicy": "flux-system:demo-ui:tag"}
       service:
         type: ClusterIP
         port: 80
@@ -66,7 +66,7 @@ spec:
     pocv:
       enabled: true
       image:
-        tag: pocv-v0.5.1 # {"$imagepolicy": "flux-system:pocv:tag"}
+        tag: pocv-v0.5.2 # {"$imagepolicy": "flux-system:pocv:tag"}
       env:
         secretName: pocv-secrets
         extra:
