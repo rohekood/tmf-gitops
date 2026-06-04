@@ -23,6 +23,9 @@ spec:
           secretName: bff-secrets
           domainKey: AUTH0_DOMAIN
           audienceKey: AUTH0_AUDIENCE
+        extra:
+          - name: RABBITMQ_PASSIVE_DECLARE
+            value: "true"
     customer-management:
       enabled: true
       image:
