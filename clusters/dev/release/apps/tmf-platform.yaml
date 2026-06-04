@@ -69,7 +69,7 @@ spec:
     pocv:
       enabled: true
       image:
-        tag: pocv-v0.5.2 # {"$imagepolicy": "flux-system:pocv:tag"}
+        tag: pocv-v0.5.3 # {"$imagepolicy": "flux-system:pocv:tag"}
       env:
         secretName: pocv-secrets
         extra:
