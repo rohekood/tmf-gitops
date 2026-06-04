@@ -49,6 +49,7 @@ spec:
         auth0AudienceKey: AUTH0_AUDIENCE
         apiUrl: ""
         apiBaseUrl: ""
+        bffHost: "tmf-platform-bff"
     emissary:
       enabled: false
       # Optional: set hostname (DNS/IP) to require Host header matching.
