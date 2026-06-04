@@ -16,13 +16,12 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-prod-key
     solvers:
-      - http01:
-          ingress:
-            ingressClassName: nginx
-            ingressTemplate:
-              metadata:
-                annotations:
-                  nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      - dns01:
+          acmeDNS:
+            host: https://auth.acme-dns.io
+            accountSecretRef:
+              name: acme-dns-credentials
+              key: acmedns.json
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
