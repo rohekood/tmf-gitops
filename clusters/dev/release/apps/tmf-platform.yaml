@@ -60,7 +60,7 @@ spec:
     party-management:
       enabled: true
       image:
-        tag: party-management-v0.4.2 # {"$imagepolicy": "flux-system:party-management:tag"}
+        tag: party-management-v0.4.3 # {"$imagepolicy": "flux-system:party-management:tag"}
       env:
         secretName: party-management-secrets
         extra:
