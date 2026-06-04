@@ -1,0 +1,17 @@
+# Delivers all catalog events to the BFF event queue for WebSocket fan-out.
+# Routing key evt.# matches every event the catalog service publishes
+# (evt.catalog.offering.*, evt.catalog.category.*, evt.catalog.specification.*, etc.).
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: bff-events-catalog-wildcard
+  namespace: tmf
+spec:
+  source: catalog_events
+  destination: q.bff.events
+  destinationType: queue
+  vhost: tmf
+  routingKey: "evt.#"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials

@@ -36,7 +36,7 @@ metadata:
   name: cart-catalog-sync-offering-wildcard
   namespace: tmf
 spec:
-  source: ex.domain.catalog
+  source: catalog_events
   destination: q.cart.catalog.sync
   destinationType: queue
   vhost: tmf

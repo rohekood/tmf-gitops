@@ -59,22 +59,56 @@ spec:
     connectionSecret:
       name: rabbitmq-topology-credentials
 ---
+# catalog_queries handles non-offering queries (catalog, category, specification).
+# These three bindings intentionally exclude query.catalog.offering.# to avoid
+# double-delivery with catalog-rpc-offering-wildcard below.
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
-  name: catalog-queries-wildcard
+  name: catalog-queries-catalog-wildcard
   namespace: tmf
 spec:
   source: catalog_events
   destination: catalog_queries
   destinationType: queue
   vhost: tmf
-  routingKey: "query.catalog.#"
+  routingKey: "query.catalog.catalog.#"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: catalog-queries-category-wildcard
+  namespace: tmf
+spec:
+  source: catalog_events
+  destination: catalog_queries
+  destinationType: queue
+  vhost: tmf
+  routingKey: "query.catalog.category.#"
+  rabbitmqClusterReference:
+    connectionSecret:
+      name: rabbitmq-topology-credentials
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: catalog-queries-specification-wildcard
+  namespace: tmf
+spec:
+  source: catalog_events
+  destination: catalog_queries
+  destinationType: queue
+  vhost: tmf
+  routingKey: "query.catalog.specification.#"
   rabbitmqClusterReference:
     connectionSecret:
       name: rabbitmq-topology-credentials
 ---
 # RPC binding: handles synchronous offering queries from BFF and qualification.
+# Exclusive — query.catalog.offering.# is NOT bound to catalog_queries.
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:

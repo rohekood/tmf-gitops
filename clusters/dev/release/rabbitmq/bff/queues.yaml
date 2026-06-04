@@ -1,13 +1,11 @@
----
-# Cart commands, cart RPC, and checkout submission.
+# Receives all events from catalog_events exchange for WebSocket fan-out to connected browsers.
 apiVersion: rabbitmq.com/v1beta1
-kind: Exchange
+kind: Queue
 metadata:
-  name: ex-domain-commerce
+  name: q-bff-events
   namespace: tmf
 spec:
-  name: ex.domain.commerce
-  type: topic
+  name: q.bff.events
   durable: true
   autoDelete: false
   vhost: tmf
