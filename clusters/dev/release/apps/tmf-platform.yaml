@@ -88,7 +88,7 @@ spec:
     qualification:
       enabled: true
       image:
-        tag: qualification-v0.5.0 # {"$imagepolicy": "flux-system:qualification:tag"}
+        tag: qualification-v0.5.1 # {"$imagepolicy": "flux-system:qualification:tag"}
       env:
         secretName: qualification-secrets
         redisAddr: 192.168.10.254:6379
