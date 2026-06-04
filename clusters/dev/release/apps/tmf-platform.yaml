@@ -29,7 +29,7 @@ spec:
     customer-management:
       enabled: true
       image:
-        tag: customer-management-v0.4.1 # {"$imagepolicy": "flux-system:customer-management:tag"}
+        tag: customer-management-v0.4.2 # {"$imagepolicy": "flux-system:customer-management:tag"}
       env:
         secretName: customer-management-secrets
         extra:
@@ -61,7 +61,7 @@ spec:
     party-management:
       enabled: true
       image:
-        tag: party-management-v0.4.2 # {"$imagepolicy": "flux-system:party-management:tag"}
+        tag: party-management-v0.4.3 # {"$imagepolicy": "flux-system:party-management:tag"}
       env:
         secretName: party-management-secrets
         extra:
@@ -70,7 +70,7 @@ spec:
     pocv:
       enabled: true
       image:
-        tag: pocv-v0.5.2 # {"$imagepolicy": "flux-system:pocv:tag"}
+        tag: pocv-v0.5.3 # {"$imagepolicy": "flux-system:pocv:tag"}
       env:
         secretName: pocv-secrets
         extra:
@@ -98,7 +98,7 @@ spec:
     shopping-cart:
       enabled: true
       image:
-        tag: shopping-cart-v0.5.1 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
+        tag: shopping-cart-v0.5.2 # {"$imagepolicy": "flux-system:shopping-cart:tag"}
       env:
         secretName: shopping-cart-secrets
         extra:
