@@ -79,7 +79,7 @@ spec:
     product-catalog-management:
       enabled: true
       image:
-        tag: product-catalog-management-v0.5.0 # {"$imagepolicy": "flux-system:product-catalog-management:tag"}
+        tag: product-catalog-management-v0.6.0 # {"$imagepolicy": "flux-system:product-catalog-management:tag"}
       env:
         secretName: product-catalog-management-secrets
         extra:
