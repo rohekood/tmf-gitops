@@ -29,7 +29,7 @@ spec:
     customer-management:
       enabled: true
       image:
-        tag: customer-management-v0.5.0 # {"$imagepolicy": "flux-system:customer-management:tag"}
+        tag: customer-management-v0.6.0 # {"$imagepolicy": "flux-system:customer-management:tag"}
       env:
         secretName: customer-management-secrets
         extra:
