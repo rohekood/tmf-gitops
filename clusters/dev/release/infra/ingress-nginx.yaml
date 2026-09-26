@@ -25,5 +25,6 @@ spec:
       ingressClass: nginx
       service:
         type: LoadBalancer
+        externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/address-pool: ingress-nginx-pool
